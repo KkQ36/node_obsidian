@@ -39,7 +39,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "test.md"
+                "file": "🐾 Quartz.md"
               }
             }
           }
@@ -81,6 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "🐾 Quartz.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +98,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "🐾 Quartz.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -184,10 +186,10 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "aa4d292417628e78",
+  "active": "4818d9ced786e2e0",
   "lastOpenFiles": [
-    "🐾 Quartz.md",
     "test.md",
+    "🐾 Quartz.md",
     "未命名.canvas",
     "🐸 CountDownLatch 原理剖析.md",
     "🐑 ElasticSearch.md",
