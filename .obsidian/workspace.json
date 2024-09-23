@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "267c155d767a0141",
+    "type": "split",
+    "children": [
+      {
+        "id": "577b8cd01abc62a5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c43a3ed467367f43",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "90f52861c8af5c79",
+    "type": "split",
+    "children": [
+      {
+        "id": "1062222145a4ab2b",
+        "type": "tabs",
+        "dimension": 48.13874788494078,
+        "children": [
+          {
+            "id": "cd9e4f53c00ff42b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      },
+      {
+        "id": "80116fdaa3acf0e7",
+        "type": "tabs",
+        "dimension": 51.86125211505922,
+        "children": [
+          {
+            "id": "aa4d292417628e78",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 402.51103591918945
+  },
+  "right": {
+    "id": "6fec87312ced2d99",
+    "type": "split",
+    "children": [
+      {
+        "id": "815551ff2b2af7ec",
+        "type": "tabs",
+        "dimension": 34.317718940936864,
+        "children": [
+          {
+            "id": "21bc53b0b276cb7f",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": true,
+                "searchQuery": "",
+                "backlinkCollapsed": true,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "33b4b6adc33def83",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "ec6b7c87f66ad56c",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "11529fed765d80e2",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          },
+          {
+            "id": "4818d9ced786e2e0",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 4
+      },
+      {
+        "id": "38b899c7b9698788",
+        "type": "tabs",
+        "dimension": 20.366598778004075,
+        "children": [
+          {
+            "id": "8a3179e717439406",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "id": "a34abd36c704db7c",
+        "type": "tabs",
+        "dimension": 45.31568228105906,
+        "children": [
+          {
+            "id": "0f7d50b96ba46ec3",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 294.5
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "4818d9ced786e2e0",
+  "lastOpenFiles": [
+    "未命名.canvas",
+    "🐸 CountDownLatch 原理剖析.md",
+    "🐑 ElasticSearch.md",
+    "🐾 Quartz.md",
+    "🏂线程池源码详解.md",
+    "images/Pasted image 20240923201510.png",
+    "images/Pasted image 20240923193359.png",
+    "images/Pasted image 20240923185951.png",
+    "Pasted image 20240923185935.png",
+    "💓 Sharing JDBC.md",
+    "🦺 Dubbo.md",
+    "🩹 XXL-JOB.md",
+    "🦅 回溯算法总结.md",
+    "images/Pasted image 20240923170241.png",
+    "images/Pasted image 20240923164229.png",
+    "images/Pasted image 20240923161803.png",
+    "images/Pasted image 20240923161745.png",
+    "images/Pasted image 20240923161037.png",
+    "images/Pasted image 20240923153629.png",
+    "🍮 Spring 的 @Autowired 和 @Resource 有什么区别？.md",
+    "未命名",
+    "🏀ThreadLocal + InheritableThreadLocal 源码解析.md",
+    "👯ArrayList 扩容机制源码全解.md",
+    "tables_xxl_job.sql",
+    "2024-09-20.md",
+    "images"
+  ]
+}

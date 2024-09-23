@@ -1,0 +1,16 @@
+{
+  "rightToLeft": false,
+  "showIndentGuide": false,
+  "showLineNumber": true,
+  "readableLineLength": false,
+  "foldHeading": false,
+  "spellcheck": false,
+  "promptDelete": false,
+  "attachmentFolderPath": "/",
+  "pdfExportSettings": {
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "0",
+    "downscalePercent": 100
+  }
+}
