@@ -11,11 +11,28 @@
             "id": "c43a3ed467367f43",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "🐾 Quartz.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "f9a9f57cad33d272",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "test.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -34,7 +51,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "test.md"
+              }
             }
           }
         ]
@@ -75,6 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "test.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -91,6 +111,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "test.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -178,12 +199,13 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4818d9ced786e2e0",
+  "active": "f9a9f57cad33d272",
   "lastOpenFiles": [
+    "🐾 Quartz.md",
+    "test.md",
     "未命名.canvas",
     "🐸 CountDownLatch 原理剖析.md",
     "🐑 ElasticSearch.md",
-    "🐾 Quartz.md",
     "🏂线程池源码详解.md",
     "images/Pasted image 20240923201510.png",
     "images/Pasted image 20240923193359.png",
