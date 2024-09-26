@@ -4,5 +4,9 @@
   "things-style@@fancy-code": true,
   "things-style@@no-kanban-styles": true,
   "things-style@@floating-button-off": true,
-  "things-style@@fancy-highlight": true
+  "things-style@@fancy-highlight": true,
+  "things-style@@h1-color": "#172A39",
+  "things-style@@h2-color": "#375D82",
+  "things-style@@h4-color": "#84BCCF",
+  "things-style@@h5-color": "#77D1D0"
 }

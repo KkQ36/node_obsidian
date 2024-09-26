@@ -25,7 +25,7 @@ Maven 坐标：
 **Tigger(触发器)**，定义任务的调度计划，控制任务何时触发。最常用的触发器是 SimpleTrigger 和 CronTrigger。
 ![[Pasted image 20240921110048.png|700]]
 **Scheduler**：调度器，负责管理任务的执行，可以启动、暂停、停止任务。
-![[Pasted image 20240921110511.png|700]]
+![[Pasted image 20240921110511.png|650]]
 ## 核心 API
 Quartz 的核心 API 主要集中在任务调度、触发器、作业细节以及调度器管理等方面。下面列举 Quartz 的几个关键核心 API：
 - **Job 接口**：所有需要执行的任务都必须实现该接口，定义任务执行逻辑。

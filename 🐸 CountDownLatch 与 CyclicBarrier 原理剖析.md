@@ -1,4 +1,5 @@
-# 案例介绍
+# CountDownLatch 原理探究
+## 案例介绍
 在日常开发中经常会遇到需要在主线程中开启多个线程去并行执行任务 ， 并且主线程需要等待所有子线程执行完毕后再进行汇总的场景。
 在 `CountDownLatch` 出现之前一般都使用线程的 `join()` 方法来实现这一点，但是 `join()` 方法不够灵活 ，不能够满足不同场景的需要。
 所以 JDK 开发组提供了 `CountDownLatch` 这个类，使用它可以优雅的做到线程同步：
@@ -83,8 +84,8 @@ public class Example_ThreadPool {
 线程 2 执行
 all thread over
 ```
-# 实现原理探究
-## 构造方法
+## 实现原理探究
+### 构造方法
 从 CountDownLatch 的名字就可以猜测其内部应该有个计数器，并且这个计数器是递减的，来看一下它的类图结构：
 ![[Pasted image 20240923201510.png|600]]
 从类图可以看出，`CountDownLatch` 类是使用 AQS 实现的，其静态内部类 Sync 通过继承 AQS 来实现类似锁的结构（和 ReentrantLock 结构很相似），来看一下它的构造函数：
@@ -99,7 +100,7 @@ Sync(int count) {
 }
 ```
 其实就是将 AQS 的 `state` 设置成了传入的 `count`；看到这里，它的实现逻辑就不难猜测了，我们来看几个关键的方法。
-## void await() 方法
+### void await() 方法
 当线程调用 `CountDownLatch` 的 `await` 方法的时候，当前线程会被阻塞直到下面两种情况的时候会停止等待。
 - 其他线程调用完了 `CountDownLatch` 的 `countDown` 方法计数器变为 0 的时候。
 - 其他线程调用了当前线程的 `interrupt()` 方法导致线程被中断。
@@ -129,7 +130,7 @@ protected int tryAcquireShared(int acquires) {
 ```java
 LockSupport.park(this);
 ```
-## void countDown() 方法
+### void countDown() 方法
 线程调用该方法后，计数器的值递减 ，递减后如果计数器值为 0 则唤醒所有因调用 `await()` 方法而被阻塞的线程，否则什么都不做。下面看下 `countDown()` 方法是如何调用 AQS 的方法的。
 ```java
 public void countDown() {  
@@ -180,3 +181,14 @@ if (acquired) {
     return 1;  
 }
 ```
+
+# CyclicBarrier 回环屏障原理探究
+## 基本介绍
+上节介绍的 CountDownLatch 在解决多个线程同步方面相对于调用线程的 join 方法己经有了不少优化，但是 CountDownLatch 的计数器是**一次性的**，也就是等到计数器值变为0 后，再调用 CountDownLatch 的 await 和 countdown 方法都会立刻返回，这就起不到线程同步的效果了 。
+所以为了满足计数器可以重置的需要， JDK 开发组提供了 CyclicBarrier类 ， 并且 CyclicBarrier 类的功能 并不限于 CountDownLatch 的功能 。
+从字面意思理解，CyclicBarrier 是回环屏障的意思 ，它可以让一组线程全部达到一个状态后再全部同时执行 。
+这里之所以叫作回环是因为当所有等待线程执行完毕，并重置 CyclicBarrier 的状态后它可以被重用。之所以叫作屏障是因为线程调用 await 方法后就会被阻塞，这个阻塞点就称为屏障点，等所有线程都调用了 await 方法后，线程们就会冲破屏障，继续向下运行。
+比如，我们来看一个例子：
+![[Pasted image 20240924212023.png|800]]
+有两个线程，当它们同时到达屏障的时候，count 变为零，线程得以穿过屏障；我们可以简单理解为两个线程需要拼车，当车上的人数达到 count 的时候，才能发车继续向下执行；同时发车后，又会有一辆新的车继续提供给线程乘坐。
+## 案例介绍
