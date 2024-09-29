@@ -206,3 +206,184 @@ public class FileChannelTest {
     }  
 }
 ```
+## Path & Paths
+jdk7 引入了 Path 和 Paths 类
+- Path 用来表示文件路径
+- Paths 是工具类，用来获取 Path 实例
+```java
+Path source = Paths.get("1.txt"); // 相对路径 使用 user.dir 环境变量来定位 1.txt
+
+Path source = Paths.get("d:\\1.txt"); // 绝对路径 代表了  d:\1.txt
+
+Path source = Paths.get("d:/1.txt"); // 绝对路径 同样代表了  d:\1.txt
+
+Path projects = Paths.get("d:\\data", "projects"); // 代表了  d:\data\projects
+```
+## Files
+检查文件是否存在
+```java
+Path path = Paths.get("helloword/data.txt");
+System.out.println(Files.exists(path));
+```
+创建一级目录
+```java
+Path path = Paths.get("helloword/d1");
+Files.createDirectory(path);
+```
+- 如果目录已存在，会抛异常 FileAlreadyExistsException
+- 不能一次创建多级目录，否则会抛异常 NoSuchFileException
+创建多级目录用
+```java
+Path path = Paths.get("helloword/d1/d2");
+Files.createDirectories(path);
+```
+拷贝文件
+```java
+Path source = Paths.get("helloword/data.txt");
+Path target = Paths.get("helloword/target.txt");
+
+Files.copy(source, target);
+```
+- 如果文件已存在，会抛异常 FileAlreadyExistsException
+如果希望用 source 覆盖掉 target，需要用 StandardCopyOption 来控制
+```java
+Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+```
+移动文件
+```java
+Path source = Paths.get("helloword/data.txt");
+Path target = Paths.get("helloword/data.txt");
+
+Files.move(source, target, StandardCopyOption.ATOMIC_MOVE);
+```
+- StandardCopyOption.ATOMIC_MOVE 保证文件移动的原子性
+删除文件
+```java
+Path target = Paths.get("helloword/target.txt");
+
+Files.delete(target);
+```
+- 如果文件不存在，会抛异常 NoSuchFileException
+删除目录
+```java
+Path target = Paths.get("helloword/d1");
+
+Files.delete(target);
+```
+- 如果目录还有内容，会抛异常 DirectoryNotEmptyException
+遍历目录文件
+```java
+public static void main(String[] args) throws IOException {
+    Path path = Paths.get("C:\\Program Files\\Java\\jdk1.8.0_91");
+    AtomicInteger dirCount = new AtomicInteger();
+    AtomicInteger fileCount = new AtomicInteger();
+    Files.walkFileTree(path, new SimpleFileVisitor&lt;Path&gt;(){
+	    // 访问目录之前执行
+        @Override
+        public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) 
+            throws IOException {
+            System.out.println(dir);
+            dirCount.incrementAndGet();
+            return super.preVisitDirectory(dir, attrs);
+        }
+        
+		// 访问文件时执行
+        @Override
+        public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) 
+            throws IOException {
+            System.out.println(file);
+            fileCount.incrementAndGet();
+            return super.visitFile(file, attrs);
+        }
+    });
+    System.out.println(dirCount); // 133
+    System.out.println(fileCount); // 1479
+}
+```
+删除多级目录
+```java
+Path path = Paths.get("d");
+Files.walkFileTree(path, new SimpleFileVisitor&lt;Path&gt;(){
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) 
+        throws IOException {
+        Files.delete(file);
+        return super.visitFile(file, attrs);
+    }
+
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) 
+        throws IOException {
+        Files.delete(dir);
+        return super.postVisitDirectory(dir, exc);
+    }
+});
+```
+拷贝多级目录
+```java
+String source = "D:\\Snipaste-1.16.2-x64";
+String target = "D:\\Snipaste-1.16.2-x64aaa";
+
+Files.walk(Paths.get(source)).forEach(path -&gt; {
+    try {
+        String targetName = path.toString().replace(source, target);
+        // 是目录
+        if (Files.isDirectory(path)) {
+            Files.createDirectory(Paths.get(targetName));
+        }
+        // 是普通文件
+        else if (Files.isRegularFile(path)) {
+            Files.copy(path, Paths.get(targetName));
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+});
+```
+# 网络编程
+## 演示阻塞模式
+Server，存在两个阻塞的位置，分别是 `accept()` 和 `read()` 方法
+```java
+public class Server {  
+    public static void main(String[] args) {  
+        ByteBuffer buffer = ByteBuffer.allocate(16);  
+        try (ServerSocketChannel ssc = ServerSocketChannel.open()) {  
+            ssc.bind(new InetSocketAddress(8080));  
+            List<SocketChannel> channels = new ArrayList<>();  
+            while (true) {  
+                SocketChannel accept = ssc.accept(); // 阻塞，等待连接  
+                channels.add(accept);  
+                for (SocketChannel channel : channels) {  
+                    channel.read(buffer); // 阻塞，等待读取数据  
+                    buffer.flip();  
+                    while (buffer.hasRemaining()) {  
+                        System.out.print((char) buffer.get());  
+                    }  
+                    buffer.clear();  
+                    System.out.println("\n------");  
+                }  
+  
+            }  
+        } catch (IOException e) {  
+            throw new RuntimeException(e);  
+        }  
+    }  
+}
+```
+Client
+```java
+public class Client {  
+    public static void main(String[] args) {  
+        try (SocketChannel sc = SocketChannel.open()){  
+            sc.connect(new InetSocketAddress("localhost", 8080));  
+            sc.write(StandardCharsets.UTF_8.encode("hello"));  
+        } catch (IOException e) {  
+            throw new RuntimeException(e);  
+        }  
+    }  
+}
+```
+## 非阻塞模式演示
+要改为非阻塞模式，只需要设置 `ServerSocketChannel` 和 `SocketChannel`为非阻塞模式，可以分别让 `accept()` 方法和 `read()` 方法变为非阻塞的模式。
+- accept 如果没有获取到连接，返回的是 null。
+- read 如果没有读取到数据的话，返回的是 0（读取到 0 字节）。
